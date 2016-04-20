@@ -10,8 +10,7 @@ This exercise uses the **Fuel Economy** data set from the **AppliedPredicitiveMo
 Note: The following will set-up your environment for this exercise. If you get an error stating that the packages have not been found, you need to install those packages.
 
 
-```{r,echo=FALSE}
-
+```{r}
 packs <-  c('AppliedPredictiveModeling', 'ggplot2', 'magrittr', 'dplyr')
 
 for( nm in packs ) { 
@@ -22,10 +21,8 @@ for( nm in packs ) {
 
 # Load data set into environment
 data(FuelEconomy)
-... = NULL  # Needed for aesthetics 
 
 ```
-
 
 
 ## Exercise 1
@@ -36,21 +33,21 @@ Hint: See `?cars2010`
 - After the **Fuel Economy** data is loaded, combine three data sets into one data set. (Note: The name `dat` is very often used in these situations, `data` is a reserved R word.)  
 
 ```{r}
-dat <- bind_rows( cars2010, cars2011, cars2012)    # Define 
+dat <- dplyr::bind_rows(cars2010, cars2011, cars2012)    # Define 
 ```
 
 
 - What is a good "naive guess" of FE? Show your work
 
 ```{r}
-naive_guess <- mean(dat$FE)
+naive_guess <- median(dat$FE)
 ```
 
 
 - plot FE (Fuel Econonomy) vs. EngDisp. Plot the naive guess.
 
 ```{r}
-# ... ggplot2  
+qplot(dat$FE, dat$EngDispl,xlab="Fuel Economy",ylab = "Engine Displacement") 
 ```
 
 - Sample 10 observations from `dat`
@@ -65,9 +62,12 @@ set.seed(314)
 samp <- dat %>% dplyr::sample_n(10) 
 
 # Plots 
-...
 
-
+samp  %>% ggplot(aes(x=EngDispl, y=FE))
+samp  %>% ggplot(aes(x=EngDispl, y=FE)) + geom_point()
+samp  %>% ggplot(aes(x=EngDispl, y=FE)) + geom_point() + geom_hline(yintercept = naive_guess,color="red")
+samp  %>% ggplot(aes(x=EngDispl, y=FE)) + geom_point() + geom_hline(yintercept = naive_guess,color="red") + stat_smooth(method = "lm", se=F)
+qplot(dat$FE - naive_guess)
 ```
 
 
@@ -85,23 +85,26 @@ All functions should accept two arguments:
 ```{r}
 
 rmse <- function(y,yhat) {
-  ( y - yhat )^2  %>% mean   %>% sqrt 
+  (y - yhat)^2 %>% mean %>% sqrt
 }
 
 mae <- function(y, yhat) {
-  # ...
+  (y-yhat) %>% abs %>% mean
 }
 
 medae <- function(y, yhat) { 
-  # ...
+  (y-median(yhat)) %>% abs %>% median
 }
 
 ```
 
 Use these functions to evaluate the loss/performance of:
 - the naive guess
-
-
+```{r}
+rmse(dat$FE,naive_guess)
+mae(dat$FE,naive_guess)
+medae(dat$FE,naive_guess)
+```
 
 ## Exercise 3: Linear Model and Model Performance 
 
@@ -109,7 +112,7 @@ Use these functions to evaluate the loss/performance of:
 
 
 ```{r}
-fit.2010 <- ... 
+fit.2010 <- lm(FE ~ EngDispl,data=cars2010)
 ```
 
 - Use your functions to evaluate the training error
@@ -119,13 +122,13 @@ fit.2010 <- ...
 
 ```{r}
 
-y.2010 <- ... 
-y.2011 <- ... 
-y.2012 <- ...
+y.2010 <- fit.2010$fitted.values
+y.2011 <- predict.lm(fit.2010, cars2011)
+y.2012 <- predict.lm(fit.2010, cars2012)
 
-rmse.2010 <- ...
-rmse.2011 <- ...
-rmse.2012 <- ... 
+rmse.2010 <- rmse(cars2010$FE,fit.2010$fitted.values)
+rmse.2011 <- rmse(cars2011$FE,y.2011)
+rmse.2012 <- rmse(cars2012$FE,y.2012)
 
 ```
 
@@ -145,6 +148,6 @@ rmse.2012
 
 
 ```{r}
-fit.2010 <- ...
-betas <- ...
+fit.2010 <- lm(FE ~ EngDispl+NumCyl+VarValveTiming+VarValveLift,data=cars2010)
+betas <- fit.2010$coefficients
 ```
