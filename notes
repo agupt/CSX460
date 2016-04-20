@@ -1,0 +1,53 @@
+wed-13
+$name works for list not for vector
+[[..]] -- reach inside
+[..] -- slice
+data struct
+
+vector share same data type
+list probably mix data type / names collection of tyoe
+data.frame similar to sql table / underneat list of vector / vector is col vector / all vectors are same size / row are mazor i.e. considers row first
+data.frame data can be accessed by names
+data.frame slow
+data.table put frames on steriods
+data.table[where clause, select clause]
+
+packages
+
+check lecture slides
+devetools is awesome to group reusable code into packages
+search() --> prints loaded packages
+
+
+continus reponse is called REGRESSION
+categorical response is called CLassififcation
+
+supervised learning netflix erecomendation
+unsupervised learning group customer in group ??? test data availability
+
+
+start with naive guess, you know this is incorrect if your model is not doing better its close to naive
+
+
+Loss function
+
+measure of error is observed - predicted
+error properties of model is the main motivator to measure model
+square of difference foloowed by square root RMSE
+other way couldbe absolute followed by mean
+
+
+Important things to any ML Algo
+
+errors measurement ==> loss function
+model ==> restrict class of function to predict values
+search ==> process and select from restrict class of function or models
+
+search
+
+lenier model
+always use it
+R --> lm
+fit <- lm(formula=FE ~ CarlineClassDesc + EngDispl,data = dat)
+fit <- lm(formula=FE ~ .,data = dat)
+fit <- lm(formula=FE ~ EngDispl,data = dat)
