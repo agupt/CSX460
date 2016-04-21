@@ -59,6 +59,13 @@ Using Fuel Economy data set from the **AppliedPredictiveModeling** Package.
 ```{r}
 
  # Your work here
+fit.min <- lm(FE ~ 1, fe)
+
+stepAIC(fit.min, scope=~ 1 + EngDispl + NumCyl + Transmission + FE + AirAspirationMethod + NumGears + TransLockup + TransCreeperGear + DriveDesc + IntakeValvePerCyl + ExhaustValvesPerCyl + CarlineClassDesc + VarValveTiming + VarValveLift, direction="forward") -> fit.min.forward
+
+fit.full <- lm(FE ~ ., fe)
+
+stepAIC(fit.full, scope= ~ 1, direction = "backward") -> fit.full.backward
 
 ```
 

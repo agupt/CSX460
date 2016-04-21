@@ -5,11 +5,11 @@ $name works for list not for vector
 data struct
 
 vector share same data type
-list probably mix data type / names collection of tyoe
-data.frame similar to sql table / underneat list of vector / vector is col vector / all vectors are same size / row are mazor i.e. considers row first
+list probably mix data type / names collection of type
+data.frame similar to sql table / underneath list of vector / vector is col vector / all vectors are same size / row are mazor i.e. considers row first
 data.frame data can be accessed by names
 data.frame slow
-data.table put frames on steriods
+data.table put frames on steroids
 data.table[where clause, select clause]
 
 packages
@@ -19,10 +19,10 @@ devetools is awesome to group reusable code into packages
 search() --> prints loaded packages
 
 
-continus reponse is called REGRESSION
-categorical response is called CLassififcation
+continuos response is called REGRESSION
+categorical response is called Classification
 
-supervised learning netflix erecomendation
+supervised learning Netflix recommendation
 unsupervised learning group customer in group ??? test data availability
 
 
@@ -33,8 +33,8 @@ Loss function
 
 measure of error is observed - predicted
 error properties of model is the main motivator to measure model
-square of difference foloowed by square root RMSE
-other way couldbe absolute followed by mean
+square of difference followed by square root RMSE
+other way could be absolute followed by mean
 
 
 Important things to any ML Algo
@@ -45,9 +45,28 @@ search ==> process and select from restrict class of function or models
 
 search
 
-lenier model
+linear/regression model
 always use it
 R --> lm
 fit <- lm(formula=FE ~ CarlineClassDesc + EngDispl,data = dat)
 fit <- lm(formula=FE ~ .,data = dat)
 fit <- lm(formula=FE ~ EngDispl,data = dat)
+
+--------------------- April 20 -------------------
+Three things are required for machine learning:
+loss function
+restricted class function : any number of mathematical function but you need to restrict it some set of function
+optimize search function : process to find best mathematical function
+
+Particle Data Group ::: Good Chapters on Stats
+Introduction to Statistical Learning ::: Stanford Gareth James Daniel Trevor Robert
+
+Correlation :: ranges from -1 to +1 :: -1 inverse correlation 0 not co-related and +1 both x inc when y inc
+co-relation can be calculated between y and yhat and they should be highly correlated
+recursive feature elimination:: look at the model find best candidate to remove/add to mode and do this recursively (class forward and backward stepwise RFE)
+binning predictor :: mostly never use or use is when data has predictor which high cardinality. Generally you loose information if you bin continously variables.
+lm mode :: R-squared - co-relation between y and yhat , literature says any value any above .7 is good , use this value to stop if you can't improve any further stop
+?curve() :: use to plot a linear model, function accepts a expression
+units of predictors matter ??
+stochastic process?? Something which has element of randomness
+AIC / BIC ? Minimize AIC https://en.wikipedia.org/wiki/Akaike_information_criterion
