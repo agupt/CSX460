@@ -70,3 +70,5 @@ lm mode :: R-squared - co-relation between y and yhat , literature says any valu
 units of predictors matter ??
 stochastic process?? Something which has element of randomness
 AIC / BIC ? Minimize AIC https://en.wikipedia.org/wiki/Akaike_information_criterion
+?glm -->logistic model
+we can use stepAIC on glm model
