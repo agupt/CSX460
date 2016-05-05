@@ -72,3 +72,24 @@ stochastic process?? Something which has element of randomness
 AIC / BIC ? Minimize AIC https://en.wikipedia.org/wiki/Akaike_information_criterion
 ?glm -->logistic model
 we can use stepAIC on glm model
+
+
+----------------- April 27 ----------------------
+Logistic regression log odd :: coefficients are log odd
+variable importance:: multiply coefficients with mean of predictors
+Significance of variable :: is measured using p-value or *** given to var in model
+Model Performance:
+RMSE for regression
+Accuracy for classification
+do not estimate performance on training data:: it will over fit and will not be generalized
+tool for unbaised estimate of performance metrics
+Measurement:: quantification
+Statistics:: measurement of stochastic performance
+ --- true value is unknown
+ --- uncertainty can be measured :: via variance, standard deviation, confidence interval, ?? repeated measurement reduce uncertainty ??
+ Resampling::
+ --- selecting optimal tuning parameter
+ --- unbiased estimate of model performance
+ Candidate set of tuning parameters::: tree depth,
+ --- related to model Example https://topepo.github.io/caret/modelList.html, khuns software does grid search on every permutation of tuning paramertes and spitts out best model based on performance metric
+ you train a model 100's of time using different subset of data. 
