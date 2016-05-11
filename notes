@@ -92,4 +92,8 @@ Statistics:: measurement of stochastic performance
  --- unbiased estimate of model performance
  Candidate set of tuning parameters::: tree depth,
  --- related to model Example https://topepo.github.io/caret/modelList.html, khuns software does grid search on every permutation of tuning paramertes and spitts out best model based on performance metric
- you train a model 100's of time using different subset of data. 
+ you train a model 100's of time using different subset of data.
+
+ ------------- May 4 ----------------------------
+ Bias :: how close to 
+ Variance :: susceptible to changes in data
