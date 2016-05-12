@@ -39,7 +39,7 @@ Save the caret objects with the names provided.
 ```{r}
 
 # Your work here. 
-ctrl <- caret::trainControl(method="boot", number=5)
+ctrl <- caret::trainControl(method="boot", number=5, classProbs = TRUE, savePredictions = TRUE) ## retain prod and preditcions to plot ROC curve
 fit.glm <- caret::train( Class ~ ., data=gcdat, trControl=ctrl, method="glm", family="binomial" )
 fit.knn <- train( Class ~ ., data=gcdat, trControl=ctrl, method="knn", tuneGrid=data.frame( k=c(40,50,60)))
 fit.rpart <- train( Class ~ ., data=gcdat, trControl=ctrl, method="rpart", tuneLength=10)
@@ -57,11 +57,21 @@ fit.myown <- train(Class ~ ., data=gcdat, method="gbm",trControl=ctrl, verbose=F
 #Show your work! 
 
 ```{r}
+
+myroc <- function(fit) {
+  roc <- roc(fit$pred$obs, fit$pred$Bad, auc=TRUE)
+  roc  %>% plot(print.auc=TRUE, grid=TRUE)
+}
 fit.myown  %>% confusionMatrix
+myroc(fit.myown)
 fit.glm  %>% confusionMatrix
+myroc(fit.glm)
 fit.rf  %>% confusionMatrix
+myroc(fit.rf)
 fit.knn  %>% confusionMatrix
+myroc(fit.knn)
 fit.rpart  %>% confusionMatrix
+myroc(fit.rpart)
 
 #myown using GBM has best accuracy. 
 
